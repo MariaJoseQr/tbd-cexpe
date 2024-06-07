@@ -22,6 +22,8 @@ npm install
 npm run dev
 ```
 
+#### Node version: 16
+
 ### Compile and Minify for Production
 
 ```sh
