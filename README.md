@@ -4,4 +4,11 @@
 ## Ejercicio: cexpe
 
 ### Versión 01
+Creación de vistas
+
 ![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/c1540283-5129-4778-979a-7ad13fb5a961)
+
+### Versión 02
+Conexión con la Base de Datos
+
+![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/77c996f9-d6f5-424b-b423-e14bc3d06231)
