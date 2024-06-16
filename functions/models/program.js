@@ -5,7 +5,6 @@ const db = mongoose.connection.useDb("cexpe");
 
 const ProgramScheme = new Schema(
   {
-    _id: { type: mongoose.Types.ObjectId },
     name: {
       type: String,
       required: true,
@@ -14,7 +13,10 @@ const ProgramScheme = new Schema(
       type: String,
     },
   },
-  { collection: "program" }
+  {
+    collection: "program",
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  }
 );
 
 const Program = db.model("ProgramScheme", ProgramScheme);

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import Programs from "../views/Programs.vue";
+import Programs from "../views/programs/Programs.vue";
+import RegisterProgram from "../views/programs/options/Register.vue";
 import Workshops from "../views/Workshops.vue";
 import Advice from "../views/Advice.vue";
 import Contact from "../views/Contact.vue";
@@ -11,15 +12,11 @@ const routes = [
     path: "/programs/:param?",
     name: "Programs",
     component: Programs,
-    props: true,
-    beforeEnter: (to, from, next) => {
-      const { param } = to.params;
-      if (!param || /^[a-zA-Z]+$/.test(param)) {
-        next();
-      } else {
-        next(false);
-      }
-    },
+  },
+  {
+    path: "/programs/register",
+    name: "RegisterProgram",
+    component: RegisterProgram,
   },
   {
     path: "/workshops/:param?",

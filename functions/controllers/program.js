@@ -1,6 +1,6 @@
 const { Program } = require("../models/program");
 
-exports.getData = async (req, res) => {
+exports.get = async (req, res) => {
   try {
     const docs = await Program.find({});
     if (docs.length === 0) console.log("No programs found.");
@@ -10,5 +10,19 @@ exports.getData = async (req, res) => {
   } catch (err) {
     console.error("Error fetching programs: ", err);
     res.status(500).send({ error: "An error occurred while retrieving data." });
+  }
+};
+
+exports.post = async (req, res) => {
+  try {
+    const { name, topic } = req.body;
+
+    const newProgram = new Program({ name, topic });
+    const savedProgram = await newProgram.save();
+
+    res.status(201).json(savedProgram);
+  } catch (error) {
+    console.error("Error creating program: ", error);
+    res.status(500).json({ error: "An error occurred while saving data." });
   }
 };
