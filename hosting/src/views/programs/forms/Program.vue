@@ -33,6 +33,10 @@ import axios from "axios";
 export default {
   name: "ProgramForm",
   props: {
+    programSelected: {
+      type: Object,
+      default: () => ({}),
+    },
     action: {
       type: String,
       default: "create",
@@ -45,6 +49,12 @@ export default {
       requiredRules: [(v) => !!v || "Este campo es obligatorio"],
     };
   },
+  created() {
+    if (this.action === "update" && this.programSelected) {
+      this.name = this.programSelected.name;
+      this.topic = this.programSelected.topic;
+    }
+  },
   methods: {
     async onSave() {
       try {
@@ -55,7 +65,8 @@ export default {
           topic: this.topic,
         };
 
-        await this.saveProgram(data);
+        if (this.action === "create") await this.saveProgram(data);
+        else await this.updateProgram({ id: this.programSelected._id, data });
 
         this.$router.replace({ name: "Programs" });
       } catch (error) {
@@ -69,6 +80,19 @@ export default {
           data
         );
 
+        return response.data;
+      } catch (error) {
+        throw new Error(
+          error.response ? error.response.data.message : error.message
+        );
+      }
+    },
+    async updateProgram({ id, data }) {
+      try {
+        const response = await axios.patch(
+          `http://localhost:3000/programs/${id}`,
+          data
+        );
         return response.data;
       } catch (error) {
         throw new Error(
