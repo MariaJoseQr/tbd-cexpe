@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Programs from "../views/programs/Programs.vue";
 import RegisterProgram from "../views/programs/options/Register.vue";
+import EditProgram from "../views/programs/options/Edit.vue";
 import Workshops from "../views/Workshops.vue";
 import Advice from "../views/Advice.vue";
 import Contact from "../views/Contact.vue";
@@ -12,6 +13,11 @@ const routes = [
     path: "/programs/:param?",
     name: "Programs",
     component: Programs,
+  },
+  {
+    path: "/programs/edit/:id",
+    name: "EditProgram",
+    component: EditProgram,
   },
   {
     path: "/programs/register",
