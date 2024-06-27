@@ -45,23 +45,47 @@
                 </template>
                 <span>Editar programa</span>
               </v-tooltip>
+              <v-tooltip>
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    v-bind="props"
+                    icon
+                    class="no-bg"
+                    @click="onOpenModalDelete(item)"
+                    ><v-icon color="critical">mdi-delete-outline</v-icon></v-btn
+                  >
+                </template>
+                <span>Eliminar programa</span>
+              </v-tooltip>
             </div>
           </template>
         </v-data-table>
       </v-col>
     </v-row>
   </v-container>
+
+  <DeleteProgramModal
+    v-if="dialogDeleteProgram"
+    :dialog="dialogDeleteProgram"
+    @update:dialog="dialogDeleteProgram = $event"
+    @programDeleted="onProgramDeleted"
+    :program="program"
+  />
 </template>
 
 <script>
 import axios from "axios";
+import DeleteProgramModal from "@/views/programs/modals/Delete.vue";
 
 export default {
   name: "Programs",
+  components: { DeleteProgramModal },
   data() {
     return {
       message: "",
       programs: [],
+      program: {},
+      dialogDeleteProgram: false,
       headers: [
         { title: "Nombre", align: "start", key: "name" },
         { title: "Tópico | Sección", align: "center", key: "topic" },
@@ -80,6 +104,15 @@ export default {
       axios.get("http://localhost:3000/programs/").then((response) => {
         this.programs = response.data.docs;
       });
+    },
+    onOpenModalDelete(program) {
+      this.program = program;
+      this.dialogDeleteProgram = true;
+    },
+    onProgramDeleted(deletedProgramId) {
+      this.programs = this.programs.filter(
+        (program) => program._id !== deletedProgramId
+      );
     },
   },
 };
