@@ -62,3 +62,21 @@ exports.patch = async (req, res) => {
     res.status(500).json({ error: "Hubo un error al actualizar el programa" });
   }
 };
+
+exports.delete = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedProgram = await Program.findByIdAndDelete(id);
+
+    if (!deletedProgram) {
+      return res.status(404).json({ message: "Program not found" });
+    }
+
+    res.status(200).json({ message: "Program deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting program: ", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting the program" });
+  }
+};
