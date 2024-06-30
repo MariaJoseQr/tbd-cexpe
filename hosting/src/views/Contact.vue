@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Contact",
   data() {
@@ -69,12 +71,23 @@ export default {
     };
   },
   methods: {
-    submit() {
+    async submit() {
       if (this.$refs.form.validate()) {
-        alert(
-          `Nombre: ${this.name}\nCorreo: ${this.email}\nMensaje: ${this.message}`
-        );
-        this.$refs.form.reset();
+        try {
+          const response = await axios.post(
+            "http://localhost:3000/send-email",
+            {
+              name: this.name,
+              email: this.email,
+              subject: this.subject,
+              message: this.message,
+            }
+          );
+          alert(response.data);
+          this.$refs.form.reset();
+        } catch (error) {
+          alert("Error al enviar el correo");
+        }
       }
     },
   },
