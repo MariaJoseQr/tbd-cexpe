@@ -23,3 +23,16 @@ Edición de datos desde la interfaz
 
 ![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/66683e50-30b6-4207-8761-75d2a1aea4e7)
 ![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/80932701-b44b-41e3-bffe-dc40ada7169d)
+
+### Versión 05
+Eliminación de datos desde la interfaz
+
+![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/90bf067c-9127-4fe0-9b72-9b63bf9d512e)
+![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/327b5cff-d9f4-4302-8716-0d5204372fd3)
+
+### Versión 06
+Formulario de contacto y envío de correos
+
+![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/35e11c17-4e06-40b9-a77a-d8645991b990)
+![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/2bf8705d-abb1-40f1-b291-bcb7231203a0)
+
