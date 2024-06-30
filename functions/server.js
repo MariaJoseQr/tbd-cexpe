@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs").promises;
+const { Lead } = require("./models/lead"); // Importa el modelo
+
 const connectDB = require("./config/db");
 const indexRoutes = require("./routes/index");
 const sendMail = require("./mail");
@@ -26,6 +28,14 @@ app.post("/send-email", async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   try {
+    const newLead = new Lead({
+      name,
+      email,
+      subject,
+      message,
+    });
+    await newLead.save();
+
     const htmlTemplate = await fs.readFile(
       "./templates/mailTemplate.html",
       "utf-8"
