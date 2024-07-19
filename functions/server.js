@@ -1,12 +1,17 @@
 const express = require("express");
 const cors = require("cors");
+const session = require("express-session");
 const fs = require("fs").promises;
-const { Lead } = require("./models/lead"); // Importa el modelo
+const { Lead } = require("./models/lead");
 
 const connectDB = require("./config/db");
 const indexRoutes = require("./routes/index");
 const sendMail = require("./mail");
 const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+connectDB();
 
 app.use(
   cors({
@@ -15,14 +20,19 @@ app.use(
   })
 );
 
-connectDB();
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRoutes);
-
-const PORT = process.env.PORT || 3000;
 
 app.post("/send-email", async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -47,9 +57,15 @@ app.post("/send-email", async (req, res) => {
       .replace("{{message}}", message);
 
     await sendMail(email, subject, htmlContent);
-    res.status(200).send("Correo enviado correctamente");
+
+    req.session.flash = { message: "Correo enviado exitosamente." };
+    res.status(200).json({ flashMessage: req.session.flash.message });
   } catch (error) {
-    res.status(500).send("Error al enviar el correo");
+    console.error("Error al enviar el correo:", error);
+    req.session.flash = { message: "Error al enviar el correo." };
+    res.status(500).json({ flashMessage: req.session.flash.message });
+  } finally {
+    req.session.flash = null;
   }
 });
 
