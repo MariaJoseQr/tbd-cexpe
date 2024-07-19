@@ -36,3 +36,7 @@ Formulario de contacto y envío de correos
 ![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/35e11c17-4e06-40b9-a77a-d8645991b990)
 ![image](https://github.com/MariaJoseQr/tbd-cexpe/assets/142237723/2bf8705d-abb1-40f1-b291-bcb7231203a0)
 
+### Versión 07
+Mensaje flash al enviar el formulario de contacto
+
+![image](https://github.com/user-attachments/assets/8731deb6-7804-4291-b22f-7f069cfadb81)
