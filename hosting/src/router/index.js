@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 import Home from "../views/Home.vue";
+import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
 import Programs from "../views/programs/Programs.vue";
 import RegisterProgram from "../views/programs/options/Register.vue";
 import EditProgram from "../views/programs/options/Edit.vue";
@@ -9,34 +12,30 @@ import Contact from "../views/Contact.vue";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
+  { path: "/login", name: "Login", component: Login },
+  { path: "/register", name: "Register", component: Register },
   {
-    path: "/programs/:param?",
+    path: "/programs",
     name: "Programs",
     component: Programs,
+    meta: { requiresAuth: true },
   },
   {
     path: "/programs/edit/:id",
     name: "EditProgram",
     component: EditProgram,
+    meta: { requiresAuth: true },
   },
   {
     path: "/programs/register",
     name: "RegisterProgram",
     component: RegisterProgram,
+    meta: { requiresAuth: true },
   },
   {
-    path: "/workshops/:param?",
+    path: "/workshops",
     name: "Workshops",
     component: Workshops,
-    props: true,
-    beforeEnter: (to, from, next) => {
-      const { param } = to.params;
-      if (!param || /^[a-zA-Z]+$/.test(param)) {
-        next();
-      } else {
-        next(false);
-      }
-    },
   },
   {
     path: "/advice/:param?",
@@ -58,6 +57,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  const isAuthenticated = !!authStore.user;
+
+  if (
+    to.matched.some((record) => record.meta.requiresAuth) &&
+    !isAuthenticated
+  ) {
+    next({ name: "Login" });
+  } else {
+    next();
+  }
 });
 
 export default router;
