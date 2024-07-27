@@ -12,6 +12,7 @@ const ProgramScheme = new Schema(
     topic: {
       type: String,
     },
+    image: { type: String },
   },
   {
     collection: "program",
