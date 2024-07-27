@@ -40,3 +40,7 @@ Formulario de contacto y envío de correos
 Mensaje flash al enviar el formulario de contacto
 
 ![image](https://github.com/user-attachments/assets/8731deb6-7804-4291-b22f-7f069cfadb81)
+
+### Versión 08
+Subir y mostrar imagen en el formulario
+![image](https://github.com/user-attachments/assets/6a672cbb-e2f5-48f2-9be6-31bac79eaded)
