@@ -29,9 +29,9 @@ exports.get = async (req, res) => {
 
 exports.post = async (req, res) => {
   try {
-    const { name, topic } = req.body;
+    const { name, topic, image } = req.body;
 
-    const newProgram = new Program({ name, topic });
+    const newProgram = new Program({ name, topic, image });
     const savedProgram = await newProgram.save();
 
     res.status(201).json(savedProgram);
