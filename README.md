@@ -43,4 +43,9 @@ Mensaje flash al enviar el formulario de contacto
 
 ### Versión 08
 Subir y mostrar imagen en el formulario
+
 ![image](https://github.com/user-attachments/assets/6a672cbb-e2f5-48f2-9be6-31bac79eaded)
+
+CRUD de imágenes
+
+![image](https://github.com/user-attachments/assets/b4f9e8cb-3e2a-473e-8b80-47290e41f3bd)
