@@ -1,10 +1,10 @@
 <template>
-  <v-form ref="formProgram" lazy-validation>
+  <v-form ref="formProgram">
     <v-row class="pa-10">
       <v-col cols="6">
         <v-text-field
           v-model="name"
-          :rules="requiredRules"
+          :rules="[(v) => !!v || 'El nombre es obligatorio']"
           label="Nombre"
           placeholder=" "
           variant="outlined"
@@ -13,7 +13,7 @@
       <v-col cols="6">
         <v-text-field
           v-model="topic"
-          :rules="requiredRules"
+          :rules="[(v) => !!v || 'El tópico es obligatorio']"
           label="Tópico"
           placeholder=" "
           variant="outlined"
@@ -22,27 +22,37 @@
 
       <v-col cols="12">
         <v-row>
-          <v-col cols="12" class="pb-0">
+          <v-col v-if="imageUrl" cols="12" class="pb-0">
             <v-img :src="imageUrl"></v-img>
           </v-col>
+          <v-col v-else>No se subió una imagen para este programa.</v-col>
           <v-col cols="12" class="pb-0 mt-5">
             <v-file-input
               v-show="false"
+              accept="image/png, image/jpeg, image/bmp"
               v-model="image"
               ref="file"
               label="File input"
-              accept="image/png, image/jpeg, image/bmp"
-              :rules="requiredRules"
               @change="uploadFile"
             ></v-file-input>
+
+            <v-btn block color="grey-lighten-4" class="mb-3" @click="loadImage">
+              <v-icon class="mr-1" size="medium">mdi mdi-camera</v-icon>
+              <span v-if="(action == 'create' && !imageUrl) || !imageUrl"
+                >Cargar imagen</span
+              >
+              <span v-else>Cambiar imagen</span>
+            </v-btn>
+
             <v-btn
               block
-              color="grey-lighten-4"
+              color="critical"
               class="mb-3"
-              @click="triggerFileInput"
+              @click="deleteImage"
+              :disabled="imageUrl == ''"
             >
-              <v-icon class="mr-1" size="medium">mdi mdi-camera</v-icon>
-              Cargar imagen
+              <v-icon class="mr-1" size="medium">mdi mdi-delete</v-icon>
+              <span>Eliminar imagen</span>
             </v-btn>
           </v-col>
         </v-row>
@@ -83,7 +93,6 @@ export default {
       image: null,
       imageUrl: "",
       file: null,
-      requiredRules: [(v) => !!v || "Este campo es obligatorio"],
     };
   },
   created() {
@@ -96,7 +105,7 @@ export default {
   methods: {
     async onSave() {
       try {
-        if (!this.$refs.formProgram.validate()) return;
+        if (!(await this.$refs.formProgram.validate())) return;
 
         if (this.image) {
           await this.uploadFile(this.image);
@@ -143,10 +152,13 @@ export default {
         );
       }
     },
-    triggerFileInput() {
+    loadImage() {
       if (this.$refs.file) {
         this.$refs.file.$el.querySelector("input").click();
       }
+    },
+    deleteImage() {
+      this.imageUrl = "";
     },
     async uploadFile(file) {
       try {
