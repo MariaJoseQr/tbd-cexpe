@@ -49,3 +49,20 @@ Subir y mostrar imagen en el formulario
 CRUD de imágenes
 
 ![image](https://github.com/user-attachments/assets/b4f9e8cb-3e2a-473e-8b80-47290e41f3bd)
+
+### Versión 09
+Agregar categoría a los programas
+
+![image](https://github.com/user-attachments/assets/a0fa8256-98cb-4315-8a6e-2c293eb70ea0)
+
+Módulo de categorías
+
+![image](https://github.com/user-attachments/assets/88bf74cf-7747-4f2c-8c7f-cc8d538be46c)
+
+Listado de los programas indicando su categoría
+
+![image](https://github.com/user-attachments/assets/03693829-6542-4fd2-9022-151715aad4dd)
+
+Filtrado por categoría
+
+![image](https://github.com/user-attachments/assets/10d6ccda-958a-426f-894c-a3a61e345b80)
