@@ -29,9 +29,9 @@ exports.get = async (req, res) => {
 
 exports.post = async (req, res) => {
   try {
-    const { name, topic, image } = req.body;
+    const { name, topic, image, categoryId } = req.body;
 
-    const newProgram = new Program({ name, topic, image });
+    const newProgram = new Program({ name, topic, image, categoryId });
     const savedProgram = await newProgram.save();
 
     res.status(201).json(savedProgram);
@@ -43,10 +43,8 @@ exports.post = async (req, res) => {
 
 exports.patch = async (req, res) => {
   try {
-    console.log("patch 1");
     const { id } = req.params;
     const dataToUpdate = req.body;
-    console.log("patch 2: ", id, dataToUpdate);
 
     const updatedProgram = await Program.findByIdAndUpdate(id, dataToUpdate, {
       new: true,

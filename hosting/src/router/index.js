@@ -6,6 +6,9 @@ import Register from "@/views/Register.vue";
 import Programs from "../views/programs/Programs.vue";
 import RegisterProgram from "../views/programs/options/Register.vue";
 import EditProgram from "../views/programs/options/Edit.vue";
+import Categories from "../views/categories/Categories.vue";
+import RegisterCategory from "../views/categories/options/Register.vue";
+import EditCategory from "../views/categories/options/Edit.vue";
 import Workshops from "../views/Workshops.vue";
 import Advice from "../views/Advice.vue";
 import Contact from "../views/Contact.vue";
@@ -31,6 +34,21 @@ const routes = [
     name: "RegisterProgram",
     component: RegisterProgram,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/categories",
+    name: "Categories",
+    component: Categories,
+  },
+  {
+    path: "/categories/edit/:id",
+    name: "EditCategory",
+    component: EditCategory,
+  },
+  {
+    path: "/categories/register",
+    name: "RegisterCategory",
+    component: RegisterCategory,
   },
   {
     path: "/workshops",

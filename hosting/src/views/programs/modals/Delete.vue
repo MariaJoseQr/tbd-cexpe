@@ -88,10 +88,6 @@ export default {
       }
     },
   },
-  created() {
-    console.log("modaaaal dialog: ", this.dialog);
-    console.log("modaaaal program: ", this.program);
-  },
 };
 </script>
 

@@ -1,6 +1,15 @@
 <template>
   <v-form ref="formProgram">
     <v-row class="pa-10">
+      <v-col cols="12">
+        <v-select
+          v-model="categoryId"
+          :items="categories"
+          item-title="name"
+          item-value="_id"
+          label="Categoría"
+        ></v-select>
+      </v-col>
       <v-col cols="6">
         <v-text-field
           v-model="name"
@@ -93,13 +102,18 @@ export default {
       image: null,
       imageUrl: "",
       file: null,
+      categories: [],
+      categoryId: "",
     };
   },
   created() {
+    this.fetchCategories();
+
     if (this.action === "update" && this.programSelected) {
       this.name = this.programSelected.name;
       this.topic = this.programSelected.topic;
       this.imageUrl = this.programSelected.image;
+      this.categoryId = this.programSelected.categoryId;
     }
   },
   methods: {
@@ -115,6 +129,7 @@ export default {
           name: this.name,
           topic: this.topic,
           image: this.imageUrl,
+          categoryId: this.categoryId,
         };
 
         if (this.action === "create") await this.saveProgram(data);
@@ -175,6 +190,11 @@ export default {
       if (file && file instanceof File) {
         this.imageUrl = URL.createObjectURL(file);
       }
+    },
+    fetchCategories() {
+      axios.get("http://localhost:3000/categories/").then((response) => {
+        this.categories = response.data.docs || [];
+      });
     },
   },
   watch: {

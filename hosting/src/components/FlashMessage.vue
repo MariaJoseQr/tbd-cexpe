@@ -44,7 +44,6 @@ export default {
   watch: {
     message(val) {
       if (val) {
-        console.log("val: ", val);
         this.show = true;
       }
     },
