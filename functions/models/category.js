@@ -3,25 +3,22 @@ const { Schema } = mongoose;
 
 const db = mongoose.connection.useDb("cexpe");
 
-const ProgramScheme = new Schema(
+const CategoryScheme = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    topic: {
-      type: String,
+    active: {
+      type: Boolean,
+      required: true,
     },
-    categoryId: {
-      type: String,
-    },
-    image: { type: String },
   },
   {
-    collection: "program",
+    collection: "category",
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
   }
 );
 
-const Program = db.model("ProgramScheme", ProgramScheme);
-module.exports = { Program };
+const Category = db.model("CategoryScheme", CategoryScheme);
+module.exports = { Category };
